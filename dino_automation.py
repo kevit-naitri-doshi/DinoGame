@@ -1,16 +1,11 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import pyautogui as gui
-from PIL import Image, ImageGrab 
 import time 
 import numpy as np
-from io import BytesIO
 import cv2
-import matplotlib.pyplot as plt
 from selenium.webdriver.chrome.options import Options
 
 options = Options()
@@ -37,13 +32,12 @@ def click(key):
         main_body.send_keys(Keys.ARROW_DOWN)
         
         
-
 def isCollision(data):
 
     cactii=data[195:237,200:240]
     bird=data[120:165,160:205]
-    cv2.imwrite('DinoGame/cactii.png', cactii) 
-    cv2.imwrite('DinoGame/bird.png', bird)
+    cv2.imwrite('Images/cactii.png', cactii) 
+    cv2.imwrite('Images/bird.png', bird)
     avg_cactii=np.mean(cactii)
     avg_bird=np.mean(bird)
     if avg_cactii<240:
@@ -61,11 +55,11 @@ def isCollision(data):
 
 def main():
     while True:
-        main_body.screenshot("DinoGame/bg.png")
-        data=cv2.imread("DinoGame/bg.png")
+        main_body.screenshot("Images/bg.png")
+        data=cv2.imread("Images/bg.png")
         data=cv2.cvtColor(data, cv2.COLOR_BGR2GRAY)
         isCollision(data)
-        time.sleep(0.05) 
+        time.sleep(0.03) 
 
         
 if __name__=='__main__':
